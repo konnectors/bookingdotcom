@@ -24,7 +24,7 @@ deploy:
   - provider: script
     repo: konnectors/booking.com
     skip-cleanup: true
-    script: DEPLOY_BRANCH=latest && yarn deploy && yarn cozyPublish
+    script: DEPLOY_BRANCH=latest yarn deploy && yarn cozyPublish
     on:
       branch: prod
   - provider: script
