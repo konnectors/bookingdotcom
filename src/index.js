@@ -12,8 +12,7 @@ process.env.SENTRY_DSN =
   process.env.SENTRY_DSN ||
   'https://a549306c82814cb8a1118c1695718eee:ed5e5794595a4182acf408de4e088037@sentry.cozycloud.cc/37'
 
-// cheerio & moment are dependencies from cozy-konnect-libs //
-const cheerio = require('cheerio')
+// cheerio & moment are dependencies from cozy-konnect-libs
 const moment = require('moment')
 
 const pdf = require('pdfjs')
@@ -32,6 +31,7 @@ const necessaryHeaders = {
 }
 const request = requestFactory({
   debug: DEBUG,
+  cheerio: true,
   jar: true,
   headers: necessaryHeaders
 })
@@ -46,10 +46,10 @@ module.exports = new BaseKonnector(start)
 async function start(fields) {
   log('info', 'Authenticating ...')
   await authenticate(fields.login, fields.password)
-  const $ = cheerio.load(await request(`${baseUrl}myreservations.html`))
+  const $ = await request(`${baseUrl}myreservations.html`)
   log('info', 'Parsing ...')
   const items = await parseBookings($)
-  log('info', 'Got ${items.length} bookings, building PDFs ...')
+  log('info', `Got ${items.length} bookings, building PDFs ...`)
   const files = await Promise.all(items.map(toFileEntry))
   log('info', 'Saving PDFs ...')
   await saveBills(files, fields, {
@@ -194,14 +194,9 @@ async function makeOldBookingPDF(item) {
 }
 
 async function makeConfirmationPDF(item) {
-  let bookingPage$ = cheerio.load(
-    await request(`${baseUrl}${item.seeBookingUrl}`)
-  )
+  let bookingPage$ = await request(`${baseUrl}${item.seeBookingUrl}`)
   const confirmationURL = bookingPage$('.view_conf').attr('href')
-  const confirmationBody = await request(`${baseUrl}${confirmationURL}`)
-  require('fs').writeFileSync('confirmation.html', confirmationBody)
-
-  let $ = cheerio.load(confirmationBody)
+  let $ = await request(`${baseUrl}${confirmationURL}`)
   var doc = new pdf.Document({ font: helveticaFont })
   makeCell(doc, 'Booking.com Confirmation #' + item.bookingNb)
   makeCell(
