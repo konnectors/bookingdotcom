@@ -28,7 +28,8 @@
     "deploy": "git-directory-deploy --directory build/ --branch ${DEPLOY_BRANCH:-build} --repo=${DEPLOY_REPOSITORY:-https://$GITHUB_TOKEN@github.com/konnectors/cozy-konnector-template.git}"
   },
   "dependencies": {
-    "cozy-konnector-libs": "4.1.4"
+    "cozy-konnector-libs": "4.1.4",
+    "pdfjs": "2.0.0-alpha.6"
   },
   "devDependencies": {
     "copy-webpack-plugin": "4.5.1",
