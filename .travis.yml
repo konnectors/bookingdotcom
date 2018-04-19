@@ -16,13 +16,19 @@ script:
   - yarn build
 deploy:
   - provider: script
-    repo: konnectors/cozy-konnector-template
+    repo: konnectors/booking.com
     skip-cleanup: true
     script: DEPLOY_BRANCH=build && yarn deploy && yarn cozyPublish
     on:
       branch: master
   - provider: script
-    repo: konnectors/cozy-konnector-template
+    repo: konnectors/booking.com
+    skip-cleanup: true
+    script: DEPLOY_BRANCH=latest && yarn deploy && yarn cozyPublish
+    on:
+      branch: prod
+  - provider: script
+    repo: konnectors/booking.com
     skip-cleanup: true
     script: DEPLOY_BRANCH=latest yarn deploy && yarn cozyPublish
     on:
