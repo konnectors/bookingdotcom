@@ -29,7 +29,7 @@
     "cozyPublish": "cozy-app-publish --token $REGISTRY_TOKEN --build-commit $(git rev-parse ${DEPLOY_BRANCH:-build})"
   },
   "dependencies": {
-    "cozy-konnector-libs": "4.1.4",
+    "cozy-konnector-libs": "4.1.7",
     "pdfjs": "2.0.0-alpha.6"
   },
   "devDependencies": {
