@@ -8,7 +8,7 @@
   "source": "git://github.com/konnectors/booking.com.git",
   "editor": "Cozy",
   "vendor_link": "http://secure.booking.com/myreservations.html",
-  "categories": ["other"],
+  "categories": ["transport"],
   "fields": {
     "advancedFields": {
       "folderPath": {
