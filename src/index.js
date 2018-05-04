@@ -50,7 +50,7 @@ async function start(fields) {
   log('info', 'Parsing ...')
   const items = await parseBookings($)
   log('info', `Got ${items.length} bookings, building PDFs ...`)
-  const files = await Promise.all(items.map(toFileEntry))
+  const files = await Promise.all(items.map(toFileEntry).filter(Boolean))
   log('info', 'Saving PDFs ...')
   await saveBills(files, fields, {
     contentType: 'application/pdf',
@@ -194,6 +194,8 @@ async function makeOldBookingPDF(item) {
 }
 
 async function makeConfirmationPDF(item) {
+  if (!item.seeBookingUrl) return false
+
   let bookingPage$ = await request(`${baseUrl}${item.seeBookingUrl}`)
   const confirmationURL = bookingPage$('.view_conf').attr('href')
   let $ = await request(`${baseUrl}${confirmationURL}`)
