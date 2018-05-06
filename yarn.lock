@@ -5872,9 +5872,9 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-pdfjs@2.0.0-alpha.6:
-  version "2.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/pdfjs/-/pdfjs-2.0.0-alpha.6.tgz#40833f8ead2d8eee3a0fbae860a1c7ea27a2ecc3"
+pdfjs@2.0.0-alpha.7:
+  version "2.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/pdfjs/-/pdfjs-2.0.0-alpha.7.tgz#43298e8b708ff3d1e16106622bb8389dbd026641"
   dependencies:
     "@rkusa/linebreak" "^1.0.0"
     opentype.js "^0.7.3"
