@@ -1,35 +1,35 @@
 language: node_js
 node_js:
-  - '8'
+- '8'
 env:
   global:
-    # cozy-bot GITHUB_TOKEN
-    - secure: ve8zUDAEVv3RwXngq4Dwb5ZKlFAUhyXZBJF6WDOlAvPqHT0mUbKhWZXJCsvkLl3j8/Zj1fYwSXFerhS7m5oRz48eO2aiKgEzjq/xnM+TkH8G5y7k+QZx6/ttuMRCpDoT9Z9vASuH/gurXLg3ACSQvsTGn1Di8iXbLSFEJBzMOpoG4kxS0SA2MucK201cT9h2yiH2Opej5Fk2200ziKPzmvGPMNjjNTujNS/7RD2Fgd70W+pcF6wkaGpd5geaV2lbtfvSX/OkRkMi7XiRlI7RWHfja5CXwoLaGXy2T/6mQgUpJjrl13JNwZrFecrv9+dTVqTdQ9MqtWPj3zO63p1ZXNFfbInUOn/zJfUFeucUr5p36JRJA7txcFOyyTDterhBynKkWd+UJurLaina3zFfeD4lnWFXuFKs3jcLcOGw44s35hSbgfYwxs5+P9CglwxmeShhKLJGuMJD2gkQDqE8ho7rk7ltyuAS9izyKeNOnyvr4WCUTQro5uGZzDZVnPFJbip8+kEoMIViGsTm1DD558f9aMV4jbgRWdBhrLYkWC3RI+3tEJaPwvOwormS2xonAYTrxS5jEF5w4VMr1oQH9OgMQ3bwWdUBRbz7aNN4SfHXxctfqcuIcVmVHHxXEpyrSrRAJlXECngCmjWhlw7N40vOW751LYR+xjgxXJ4oObs=
-    # REGISTRY_TOKEN
-    - secure: F4QbxtcDa1vY8WN+fim3U+70hB/2RuAX5dyg1/FmkdUxfxVLOBnwyFQ9j7eMB33asTopmveGOkJYCgADIOD9+9TVj4p4xJ0s+ngeFPgEHN6qwnV1ZoqlcofsWiMZc8AQn+9mqJtMfi9EIJFnprapUfmFs6/qC9z243e4boXuIrMMi1I06RuhFCdMEZB9yIGxl06VmkCeD3qs8yLDzn17ci9qqsBkx/0fi+SnBDJG7Tb9IVlBYykvrglwr2Qi6KE1DnvnDCHjNkuLh8n7eTxigkVMnIA7izv70Cd9K8jCgz1C32GkM5qQmg9OEhJrUDWvtOSERRCimglsuTWajs7ujCRNl8OGSZn7un7le9tFETEpFSV0Q+chUwvyluoOP3qx8yV2D3ZLDZ7NQWsly1OYsF8q6wZoODi+UkdEizJ5eTBpgazhGm090lMYvEr5Cq+k6kf2vmQuWQtujCS/4C5g1u40YUlWJZfNWTe0Q5Z2dvfet4gpdM8BKUNhYBJNejwuJW+NmLIOcumaocPWQEa3zTiVY/+vE0Yls2YqTOSJqbUdQ2CogMhQjY7SQxIe/XGVZxzGhgQ7nOMGZDL+49hgs2A0CurTLpQh290nMgA0mUHdsnRsHAMow7IsHhRggLFIdYFKqsjuMivgBrRLprXwNU+WLrPFaYS50QBc0ZokUF0=
+  - secure: usjiOazzD9psCgv7JDcTMNXwx86OPV1Fny0P3wysdOIYBkUxFnEH/uu4QjjfQq78a9FmvyrKtmUJfT6Kr9kTMjVkAKhspECyxedxBLRiT2fLw9YKW7YuFcEK2PPHU0vqBJVWAnkXQZpY1AIGYEZFjKkBkq8GsFyZhVNpgzk2T3RzbOs/zDgt1eEnyawxfDivE4+UPGo8q+NYIEOS5daG76ZlUp4lM60253q0ils/IV54gRNND1FtJdCo1pX7IIGC5T50LDV+v5DTX0nAFbQDJnEq9kXK17aWrCxlbrruDDlw8rQUD4YU4tPQvUAKbNm2D3vepClZlsTVs6WCPQVIV7g9xBivlHhYRZUOQ72Cy5SRP+CiWnlzImkysVVGUcHIzvq8vjbziPB6nTkRO9irOOeDHWboW/fjXLnXRK02J62hWRQLE4L9bZHpHH+oAeUu2npPtYtlE+klPHFwJTTsaer//E2O3n+Fm5ktQFyXBKEH9h22amEkmNCUi9K8qnUClyevc115raUUkpg6yJy8txvquEiFKMYav+X8AFSvssQfTI6eY0pc+QZM6fcOuYW1i4FOjR5jZ1aqtQlVPw/SQs5PTKqx/R2b9EByD7PcEy8NT1Qlu3Pf0N6to7pLDyrIwIRdrmYSXJPaBMuoaVVq6lqp5cwO41psxbiW1UCCAQ8=
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 script:
-  - yarn lint
-  - yarn build
+- yarn lint
+- yarn build
 deploy:
-  - provider: script
-    repo: konnectors/booking.com
-    skip-cleanup: true
-    script: DEPLOY_BRANCH=build && yarn deploy && yarn cozyPublish
-    on:
-      branch: master
-  - provider: script
-    repo: konnectors/booking.com
-    skip-cleanup: true
-    script: DEPLOY_BRANCH=latest yarn deploy
-    on:
-      branch: prod
-  - provider: script
-    repo: konnectors/booking.com
-    skip-cleanup: true
-    script: DEPLOY_BRANCH=latest yarn deploy && yarn cozyPublish
-    on:
-      tag: true
+- provider: script
+  repo: konnectors/booking.com
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build && yarn deploy && yarn cozyPublish
+  on:
+    branch: master
+- provider: script
+  repo: konnectors/booking.com
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=latest yarn deploy
+  on:
+    branch: prod
+- provider: script
+  repo: konnectors/booking.com
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=latest yarn deploy && yarn cozyPublish
+  on:
+    tag: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_b78799c5df97_key -iv $encrypted_b78799c5df97_iv
+  -in github_deploy_key.enc -out /tmp/github_deploy_key -d
