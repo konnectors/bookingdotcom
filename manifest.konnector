@@ -5,7 +5,7 @@
   "language": "node",
   "icon": "icon.svg",
   "slug": "bookingdotcom",
-  "source": "git://github.com/konnectors/booking.com.git",
+  "source": "git://github.com/konnectors/bookingdotcom.git",
   "editor": "Cozy",
   "vendor_link": "http://secure.booking.com/myreservations.html",
   "categories": ["transport"],
