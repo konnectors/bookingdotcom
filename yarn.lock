@@ -1208,9 +1208,9 @@ cozy-client-js@0.9.0, cozy-client-js@^0.9.0:
     pouchdb-adapter-cordova-sqlite "https://github.com/SnceGroup/pouchdb-adapter-cordova-sqlite.git#f3ee23009b70209c611435d57491aa77fb88802a"
     pouchdb-find "0.10.4"
 
-cozy-jobs-cli@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/cozy-jobs-cli/-/cozy-jobs-cli-1.4.1.tgz#15bfe433d410ed15d9e0b14c87721ef01b169fcd"
+cozy-jobs-cli@1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/cozy-jobs-cli/-/cozy-jobs-cli-1.4.2.tgz#6cdb6399efc53fe584be2f28ad7cd9097f3b9668"
   dependencies:
     btoa "^1.1.2"
     cheerio "^1.0.0-rc.2"
@@ -1218,17 +1218,17 @@ cozy-jobs-cli@1.4.1:
     commander "^2.12.2"
     core-js "2.5.7"
     cozy-client-js "^0.9.0"
-    cozy-konnector-libs "^4.5.4"
+    cozy-konnector-libs "^4.5.5"
     cozy-logger "^1.1.8"
     isomorphic-fetch "^2.2.1"
     opn "5.3.0"
     pretty "2.0.0"
-    regenerator-runtime "^0.11.1"
+    regenerator-runtime "^0.12.0"
     replay "2.3.0"
 
-cozy-konnector-libs@4.5.4, cozy-konnector-libs@^4.5.4:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/cozy-konnector-libs/-/cozy-konnector-libs-4.5.4.tgz#3792fdb9e929ab039ffaa97958af2fae42bcb113"
+cozy-konnector-libs@4.5.5, cozy-konnector-libs@^4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/cozy-konnector-libs/-/cozy-konnector-libs-4.5.5.tgz#5f011c67270fabaca0fb962e48fd050beca760a2"
   dependencies:
     bluebird "3.5.1"
     bluebird-retry "0.11.0"
@@ -1241,11 +1241,11 @@ cozy-konnector-libs@4.5.4, cozy-konnector-libs@^4.5.4:
     lodash "4.17.10"
     moment "2.22.2"
     pdfjs "2.0.0"
-    raven "2.6.2"
+    raven "2.6.3"
     request "2.87.0"
     request-debug "0.2.0"
     request-promise "4.2.2"
-    uuid "3.2.1"
+    uuid "3.3.0"
 
 cozy-logger@^1.1.8:
   version "1.1.8"
@@ -4589,9 +4589,9 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-raven@2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/raven/-/raven-2.6.2.tgz#c92f30890e2dfcd15258d184e43e39326e58032e"
+raven@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/raven/-/raven-2.6.3.tgz#207475a12809277ef54eaceafe2597ff65262ab4"
   dependencies:
     cookie "0.3.1"
     md5 "^2.2.1"
@@ -4710,9 +4710,13 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
+regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+
+regenerator-runtime@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.0.tgz#8052ac952d85b10f3425192cd0c53f45cf65c6cb"
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
@@ -5881,6 +5885,10 @@ uuid@3.2.1, uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
+uuid@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.0.tgz#b237147804881d7b86f40a7ff8f590f15c37de32"
+
 v8-compile-cache@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.0.tgz#526492e35fc616864284700b7043e01baee09f0a"
@@ -5962,9 +5970,9 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.13.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.13.0.tgz#9a7bb953109a4079e4a32843610d2dc0184dfbe6"
+webpack@4.14.0:
+  version "4.14.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.14.0.tgz#bbcc40dbf9a34129491b431574189d3802972243"
   dependencies:
     "@webassemblyjs/ast" "1.5.12"
     "@webassemblyjs/helper-module-context" "1.5.12"
