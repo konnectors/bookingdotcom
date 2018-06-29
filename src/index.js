@@ -9,19 +9,16 @@ const {
   errors,
   signin,
   scrape,
-  saveBills
+  saveBills,
+  htmlToPDF
 } = require('cozy-konnector-libs')
 
 // cheerio & moment are dependencies from cozy-konnect-libs
 const moment = require('moment')
-
 const pdf = require('pdfjs')
-
 const querystring = require('querystring')
-const html2pdf = require('./html2pdf')
 
 const DEBUG = false
-
 const baseUrl = 'https://secure.booking.com/'
 
 const necessaryHeaders = {
@@ -62,6 +59,7 @@ async function authenticate(username, password) {
   await signin({
     debug: DEBUG,
     url: `${baseUrl}myreservations.html`,
+    requestInstance: request,
     formSelector: '.js-user-access-form--signin',
     formData: { username, password },
     headers: necessaryHeaders,
@@ -153,10 +151,8 @@ async function toFileEntry(item) {
   }
 }
 
-const helveticaFont = new pdf.Font(require('pdfjs/font/Helvetica.json'))
-const helveticaBoldFont = new pdf.Font(
-  require('pdfjs/font/Helvetica-Bold.json')
-)
+const helveticaFont = require('pdfjs/font/Helvetica')
+const helveticaBoldFont = require('pdfjs/font/Helvetica-Bold')
 
 function makeCell(doc, text) {
   return doc
@@ -217,7 +213,7 @@ async function makeConfirmationPDF(item) {
       ':not(.newsletter_selection)' +
       ':not(#conf_send)'
   ).each((i, el) => {
-    html2pdf($, doc, $(el), {
+    htmlToPDF($, doc, $(el), {
       baseURL: baseUrl,
       filter: $el => {
         return (
