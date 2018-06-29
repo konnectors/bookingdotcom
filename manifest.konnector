@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "Booking.com",
   "type": "konnector",
   "language": "node",
@@ -10,6 +10,13 @@
   "vendor_link": "http://secure.booking.com/myreservations.html",
   "categories": ["transport"],
   "fields": {
+    "login": {
+      "type": "text"
+    },
+    "password": {
+      "type": "password"
+    },
+
     "advancedFields": {
       "folderPath": {
         "advanced": true,
