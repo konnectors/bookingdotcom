@@ -4336,6 +4336,17 @@ pdfjs@2.0.0:
     unorm "^1.4.1"
     uuid "^3.0.1"
 
+pdfjs@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/pdfjs/-/pdfjs-2.1.0.tgz#6d5fca67401a9f1046b4554f2d4f89f5a998f735"
+  dependencies:
+    "@rkusa/linebreak" "^1.0.0"
+    opentype.js "^0.8.0"
+    pako "^1.0.6"
+    readable-stream "^2.3.6"
+    unorm "^1.4.1"
+    uuid "^3.0.1"
+
 performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
@@ -4814,6 +4825,18 @@ readable-stream@^1.0.33, readable-stream@~1.1.9:
     inherits "~2.0.1"
     isarray "0.0.1"
     string_decoder "~0.10.x"
+
+readable-stream@^2.3.6:
+  version "2.3.6"
+  resolved "http://registry.npmjs.org/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.3"
+    isarray "~1.0.0"
+    process-nextick-args "~2.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.1.1"
+    util-deprecate "~1.0.1"
 
 readable-stream@~0.0.2:
   version "0.0.4"
@@ -5524,6 +5547,12 @@ string_decoder@~0.10.x:
 string_decoder@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
+  dependencies:
+    safe-buffer "~5.1.0"
+
+string_decoder@~1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
   dependencies:
     safe-buffer "~5.1.0"
 
