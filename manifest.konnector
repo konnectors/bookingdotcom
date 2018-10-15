@@ -16,7 +16,6 @@
     "password": {
       "type": "password"
     },
-
     "advancedFields": {
       "folderPath": {
         "advanced": true,
@@ -86,5 +85,6 @@
       }
     }
   },
-  "banksTransactionRegExp": "\\bbooking.com\\b"
+  "banksTransactionRegExp": "\\bbooking.com\\b",
+  "manifest_version": "2"
 }
