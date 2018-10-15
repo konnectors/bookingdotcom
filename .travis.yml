@@ -1,0 +1,41 @@
+language: node_js
+node_js:
+- '8'
+env:
+  global:
+  - GH_USER_EMAIL="cozy-bot@cozycloud.cc"
+  - GH_USER_NAME="cozy-bot"
+  - DEPLOY_REPOSITORY="git@github.com:konnectors/bookingdotcom.git"
+  - secure: usjiOazzD9psCgv7JDcTMNXwx86OPV1Fny0P3wysdOIYBkUxFnEH/uu4QjjfQq78a9FmvyrKtmUJfT6Kr9kTMjVkAKhspECyxedxBLRiT2fLw9YKW7YuFcEK2PPHU0vqBJVWAnkXQZpY1AIGYEZFjKkBkq8GsFyZhVNpgzk2T3RzbOs/zDgt1eEnyawxfDivE4+UPGo8q+NYIEOS5daG76ZlUp4lM60253q0ils/IV54gRNND1FtJdCo1pX7IIGC5T50LDV+v5DTX0nAFbQDJnEq9kXK17aWrCxlbrruDDlw8rQUD4YU4tPQvUAKbNm2D3vepClZlsTVs6WCPQVIV7g9xBivlHhYRZUOQ72Cy5SRP+CiWnlzImkysVVGUcHIzvq8vjbziPB6nTkRO9irOOeDHWboW/fjXLnXRK02J62hWRQLE4L9bZHpHH+oAeUu2npPtYtlE+klPHFwJTTsaer//E2O3n+Fm5ktQFyXBKEH9h22amEkmNCUi9K8qnUClyevc115raUUkpg6yJy8txvquEiFKMYav+X8AFSvssQfTI6eY0pc+QZM6fcOuYW1i4FOjR5jZ1aqtQlVPw/SQs5PTKqx/R2b9EByD7PcEy8NT1Qlu3Pf0N6to7pLDyrIwIRdrmYSXJPaBMuoaVVq6lqp5cwO41psxbiW1UCCAQ8=
+cache:
+  yarn: true
+  directories:
+  - node_modules
+branches:
+  except:
+  - build
+  - build-debug
+script:
+- yarn lint
+- yarn build
+# - yarn run check
+deploy:
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    branch: master
+- provider: script
+  skip-cleanup: true
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  on:
+    tags: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_b78799c5df97_key -iv $encrypted_b78799c5df97_iv
+  -in github_deploy_key.enc -out /tmp/github_deploy_key -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/github_deploy_key
+- ssh-add /tmp/github_deploy_key
+after_deploy:
+- rm /tmp/github_deploy_key
+- ssh-add -D
