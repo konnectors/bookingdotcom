@@ -16,7 +16,6 @@ const {
 // cheerio & moment are dependencies from cozy-konnect-libs
 const moment = require('moment')
 const pdf = require('pdfjs')
-const querystring = require('querystring')
 
 const DEBUG = false
 const baseUrl = 'https://secure.booking.com/'
@@ -32,8 +31,6 @@ const request = requestFactory({
   jar: true,
   headers: necessaryHeaders
 })
-
-const redirectInJSRegexp = /setTimeout\(\n*function\(\) {\n*document\.location\.href *= *'(.*?)'(?: *\+ *)*(?:'(.*?)')*(?: *\+ *)*(?:'(.*?)')*(?: *\+ *)*(?:'(.*?)')*(?: *\+ *)*;?\n*} *, *\d+\n*\);/g
 
 module.exports = new BaseKonnector(start)
 
@@ -65,18 +62,27 @@ async function authenticate(username, password) {
     headers: necessaryHeaders,
     validate: (statusCode, $) => {
       if (statusCode !== 200) throw errors.VENDOR_DOWN
-      const matches = redirectInJSRegexp.exec($('body script').html())
-      if (!matches || matches.length < 2) {
-        log('warning', 'signin flow has changed')
-        throw errors.VENDOR_DOWN
+      const redirect = $.html()
+        .split('\n')
+        .find(line => line.includes('document.location.href'))
+      const matches = redirect.match(/has_error=(.*)&has_error_action/)
+
+      if (
+        matches &&
+        ['wrong_password', 'wrong_username'].includes(matches[1])
+      ) {
+        return false
       }
 
-      const qs = matches.slice(2).join('')
-      const error_code = querystring.parse(qs)['has_error']
-      if (error_code == 0) {
+      if (matches && matches[1] === '0') {
         return true
+      }
+
+      if (matches) {
+        log('error', `Unknown error message ${matches[1]}`)
+        throw errors.VENDOR_DOWN
       } else {
-        return false
+        throw errors.VENDOR_DOWN
       }
     }
   })
