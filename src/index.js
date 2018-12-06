@@ -17,7 +17,7 @@ const {
 const moment = require('moment')
 const pdf = require('pdfjs')
 
-const DEBUG = false
+const DEBUG = true
 const baseUrl = 'https://secure.booking.com/'
 
 const necessaryHeaders = {
@@ -88,16 +88,15 @@ async function authenticate(username, password) {
   })
 }
 
-function parseDateBlock(node) {
-  const day = node
-    .find('.mb-dates__day')
-    .text()
-    .trim()
-  const monthAndYear = node
-    .find('.mb-dates__month')
-    .text()
-    .trim()
-  return moment(`${day} ${monthAndYear}`, 'DD MMM YYYY')
+function parseDateBlock(dateText) {
+  return moment(
+    dateText
+      .trim()
+      .split(',')
+      .pop()
+      .trim(),
+    'D MMMM YYYY'
+  )
 }
 
 async function parseBookings($) {
@@ -105,7 +104,7 @@ async function parseBookings($) {
     $,
     {
       name: {
-        sel: '.mb-block__hotel-name a',
+        sel: '.mb-hotel-name a',
         fn: node => node.text().trim()
       },
       picture: {
@@ -113,12 +112,12 @@ async function parseBookings($) {
         fn: node => node.attr('src')
       },
       start: {
-        sel: '.mb-dates__block.floatLeft',
-        fn: parseDateBlock
+        sel: '.mh-date',
+        fn: elems => parseDateBlock($(elems[0]).text())
       },
       end: {
-        sel: '.mb-dates__block.floatRight',
-        fn: parseDateBlock
+        sel: '.mh-date',
+        fn: elems => parseDateBlock($(elems[1]).text())
       },
       bookingNb: {
         sel: '.mb-block__book-number b.marginRight_5',
@@ -129,15 +128,20 @@ async function parseBookings($) {
         fn: node => node.text().trim()
       },
       price: {
-        sel: '.mb-block__price .mb-block__price__big',
-        fn: node => node.text().trim()
+        sel: '.mb-price__unit',
+        fn: node =>
+          node
+            .text()
+            .split(' ')
+            .pop()
+            .trim()
       },
       seeBookingUrl: {
         sel: '.mb-block__actions .res-actions__item-link',
         fn: node => node.attr('href')
       }
     },
-    '.js-booking_block'
+    '.mb-container'
   )
 }
 
