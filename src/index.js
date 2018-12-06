@@ -17,7 +17,7 @@ const {
 const moment = require('moment')
 const pdf = require('pdfjs')
 
-const DEBUG = true
+const DEBUG = false
 const baseUrl = 'https://secure.booking.com/'
 
 const necessaryHeaders = {
@@ -43,8 +43,10 @@ async function start(fields) {
   const $ = await request(`${baseUrl}myreservations.html`)
   log('info', 'Parsing ...')
   const items = await parseBookings($)
+  const oldItems = await parseOldBooking($)
+  items.push.apply(items, oldItems)
   log('info', `Got ${items.length} bookings, building PDFs ...`)
-  const files = await Promise.all(items.map(toFileEntry).filter(Boolean))
+  const files = (await Promise.all(items.map(toFileEntry))).filter(Boolean)
   log('info', 'Saving PDFs ...')
   await saveBills(files, fields, {
     contentType: 'application/pdf',
@@ -61,7 +63,10 @@ async function authenticate(username, password) {
     formData: { username, password },
     headers: necessaryHeaders,
     validate: (statusCode, $) => {
-      if (statusCode !== 200) throw errors.VENDOR_DOWN
+      if (statusCode !== 200) {
+        log('error', `VENDOR_DOWN status is not 200 : ${statusCode}`)
+        throw errors.VENDOR_DOWN
+      }
       const redirect = $.html()
         .split('\n')
         .find(line => line.includes('document.location.href'))
@@ -82,24 +87,67 @@ async function authenticate(username, password) {
         log('error', `Unknown error message ${matches[1]}`)
         throw errors.VENDOR_DOWN
       } else {
+        log('error', `no redirect`)
         throw errors.VENDOR_DOWN
       }
     }
   })
 }
 
-function parseDateBlock(dateText) {
-  return moment(
-    dateText
-      .trim()
-      .split(',')
-      .pop()
-      .trim(),
-    'D MMMM YYYY'
-  )
+function parseDateBlock(node) {
+  const day = node
+    .find('.mb-dates__day')
+    .text()
+    .trim()
+  const monthAndYear = node
+    .find('.mb-dates__month')
+    .text()
+    .trim()
+  return moment(`${day} ${monthAndYear}`, 'DD MMM YYYY')
 }
 
 async function parseBookings($) {
+  return scrape(
+    $,
+    {
+      name: {
+        sel: '.mb-block__hotel-name a',
+        fn: node => node.text().trim()
+      },
+      picture: {
+        sel: '.mb-block__photo img',
+        fn: node => node.attr('src')
+      },
+      start: {
+        sel: '.mb-dates__block.floatLeft',
+        fn: parseDateBlock
+      },
+      end: {
+        sel: '.mb-dates__block.floatRight',
+        fn: parseDateBlock
+      },
+      bookingNb: {
+        sel: '.mb-block__book-number b.marginRight_5',
+        fn: node => node.text().trim()
+      },
+      confirmNb: {
+        sel: '.mb-block__book-number b:not(.marginRight_5)',
+        fn: node => node.text().trim()
+      },
+      price: {
+        sel: '.mb-block__price .mb-block__price__big',
+        fn: node => node.text().trim()
+      },
+      seeBookingUrl: {
+        sel: '.mb-block__actions .res-actions__item-link',
+        fn: node => node.attr('href')
+      }
+    },
+    '.js-booking_block'
+  )
+}
+
+async function parseOldBooking($) {
   return scrape(
     $,
     {
@@ -113,11 +161,29 @@ async function parseBookings($) {
       },
       start: {
         sel: '.mh-date',
-        fn: elems => parseDateBlock($(elems[0]).text())
+        fn: elems =>
+          moment(
+            $(elems[0])
+              .text()
+              .trim()
+              .split(',')
+              .pop()
+              .trim(),
+            'D MMMM YYYY'
+          )
       },
       end: {
         sel: '.mh-date',
-        fn: elems => parseDateBlock($(elems[1]).text())
+        fn: elems =>
+          moment(
+            $(elems[1])
+              .text()
+              .trim()
+              .split(',')
+              .pop()
+              .trim(),
+            'D MMMM YYYY'
+          )
       },
       bookingNb: {
         sel: '.mb-block__book-number b.marginRight_5',
@@ -150,14 +216,21 @@ async function toFileEntry(item) {
     ? await makeConfirmationPDF(item)
     : await makeOldBookingPDF(item)
 
-  const now = moment()
+  const amount = parseFloat(
+    item.price
+      .split(' ')
+      .pop()
+      .replace(',', '.')
+  )
+  const date = item.start.toDate()
+  if (!amount || !date) return false
 
   return {
     filename: item.start.format('YYYY-MM-DD') + '-' + item.name + '.pdf',
     filestream: pdf._doc,
     vendor: 'booking.com',
-    date: item.start.isBefore(now) ? item.start.toDate() : now,
-    amount: parseFloat(item.price.replace('€', '').replace(',', '.'))
+    date,
+    amount
   }
 }
 
