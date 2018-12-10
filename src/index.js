@@ -69,8 +69,8 @@ async function resetCookies() {
 }
 
 async function authenticateWithRetry(username, password) {
-  const NB_RETRY = 5
-  const RETRY_STEP_S = 1
+  const NB_RETRY = 10
+  const RETRY_STEP_S = 10
   let lastError = false
 
   for (let i = 0; i < NB_RETRY; i++) {
