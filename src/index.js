@@ -70,7 +70,7 @@ async function resetCookies() {
 
 async function authenticateWithRetry(username, password) {
   const NB_RETRY = 5
-  const RETRY_STEP_S = 10
+  const RETRY_STEP_S = 1
   let lastError = false
 
   for (let i = 0; i < NB_RETRY; i++) {
@@ -166,17 +166,18 @@ async function parseBookings($) {
         sel: '.mb-block__book-number b.marginRight_5',
         fn: node => node.text().trim()
       },
-      confirmNb: {
-        sel: '.mb-block__book-number b:not(.marginRight_5)',
-        fn: node => node.text().trim()
-      },
       price: {
         sel: '.mb-block__price .mb-block__price__big',
         fn: node => node.text().trim()
       },
       seeBookingUrl: {
         sel: '.mb-block__actions .res-actions__item-link',
-        fn: node => node.attr('href')
+        fn: node => {
+          if (node.text().includes('Rate')) {
+            return false
+          }
+          return node.attr('href')
+        }
       }
     },
     '.js-booking_block'
@@ -225,10 +226,6 @@ async function parseOldBooking($) {
         sel: '.mb-block__book-number b.marginRight_5',
         fn: node => node.text().trim()
       },
-      confirmNb: {
-        sel: '.mb-block__book-number b:not(.marginRight_5)',
-        fn: node => node.text().trim()
-      },
       price: {
         sel: '.mb-price__unit',
         fn: node =>
@@ -240,7 +237,12 @@ async function parseOldBooking($) {
       },
       seeBookingUrl: {
         sel: '.mb-block__actions .res-actions__item-link',
-        fn: node => node.attr('href')
+        fn: node => {
+          if (node.text().includes('Rate')) {
+            return false
+          }
+          return node.attr('href')
+        }
       }
     },
     '.mb-container'
@@ -248,7 +250,7 @@ async function parseOldBooking($) {
 }
 
 async function toFileEntry(item) {
-  const pdf = item.confirmNb
+  const pdf = item.end.isAfter(new Date())
     ? await makeConfirmationPDF(item)
     : await makeOldBookingPDF(item)
 
