@@ -12,6 +12,7 @@ const {
   saveBills,
   htmlToPDF
 } = require('cozy-konnector-libs')
+const sleep = require('util').promisify(global.setTimeout)
 
 // cheerio & moment are dependencies from cozy-konnect-libs
 const moment = require('moment')
@@ -25,10 +26,13 @@ const necessaryHeaders = {
   Accept: 'text/html',
   'Accept-Language': 'en'
 }
-const request = requestFactory({
+
+let request = requestFactory()
+const j = request.jar()
+request = requestFactory({
   debug: DEBUG,
   cheerio: true,
-  jar: true,
+  jar: j,
   headers: necessaryHeaders
 })
 
@@ -39,7 +43,8 @@ module.exports = new BaseKonnector(start)
 // the account information come from ./konnector-dev-config.json file
 async function start(fields) {
   log('info', 'Authenticating ...')
-  await authenticate(fields.login, fields.password)
+  await authenticateWithRetry(fields.login, fields.password)
+  log('info', 'Authenticated')
   const $ = await request(`${baseUrl}myreservations.html`)
   log('info', 'Parsing ...')
   const items = await parseBookings($)
@@ -52,6 +57,37 @@ async function start(fields) {
     contentType: 'application/pdf',
     identifiers: ['booking.com']
   })
+}
+
+async function resetCookies() {
+  return new Promise(resolve => {
+    j._jar.store.removeCookies('booking.com', '/', err => {
+      if (err) log('error', err.message)
+      resolve()
+    })
+  })
+}
+
+async function authenticateWithRetry(username, password) {
+  const NB_RETRY = 5
+  const RETRY_STEP_S = 10
+  let lastError = false
+
+  for (let i = 0; i < NB_RETRY; i++) {
+    try {
+      log('info', `try ${i}`)
+      await resetCookies()
+      await authenticate(username, password)
+      lastError = false
+      break
+    } catch (err) {
+      log('info', err.message)
+      lastError = err.message
+      await sleep(RETRY_STEP_S * 1000)
+    }
+  }
+
+  if (lastError) throw new Error(lastError)
 }
 
 async function authenticate(username, password) {
@@ -275,8 +311,11 @@ async function makeOldBookingPDF(item) {
 async function makeConfirmationPDF(item) {
   if (!item.seeBookingUrl) return false
 
+  log('info', 'in makeConfirmationPDF')
+  log('info', item)
   let bookingPage$ = await request(`${baseUrl}${item.seeBookingUrl}`)
   const confirmationURL = bookingPage$('.view_conf').attr('href')
+  if (!confirmationURL) return false
   let $ = await request(`${baseUrl}${confirmationURL}`)
   var doc = new pdf.Document({ font: helveticaFont })
   makeCell(doc, 'Booking.com Confirmation #' + item.bookingNb)
