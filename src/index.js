@@ -71,7 +71,10 @@ async function resetCookies() {
 async function authenticateWithRetry(username, password) {
   const NB_RETRY = 10
   const RETRY_STEP_S = 5
-  const noRetryErrors = [errors.LOGIN_FAILED]
+  const noRetryErrors = [
+    errors.LOGIN_FAILED,
+    errors.USER_ACTION_NEEDED.CHANGE_PASSWORD
+  ]
   let lastError = false
 
   for (let i = 0; i < NB_RETRY; i++) {
@@ -103,7 +106,7 @@ async function authenticate(username, password) {
     validate: (statusCode, $) => {
       if (statusCode !== 200) {
         log('error', `VENDOR_DOWN status is not 200 : ${statusCode}`)
-        throw errors.VENDOR_DOWN
+        throw new Error(errors.VENDOR_DOWN)
       }
       const redirect = $.html()
         .split('\n')
@@ -121,12 +124,16 @@ async function authenticate(username, password) {
         return true
       }
 
+      if (matches && ['too_many_tries'].includes(matches[1])) {
+        throw new Error(errors.USER_ACTION_NEEDED.CHANGE_PASSWORD)
+      }
+
       if (matches) {
         log('error', `Unknown error message ${matches[1]}`)
-        throw errors.VENDOR_DOWN
+        throw new Error(errors.VENDOR_DOWN)
       } else {
         log('error', `no redirect`)
-        throw errors.VENDOR_DOWN
+        throw new Error(errors.VENDOR_DOWN)
       }
     }
   })
