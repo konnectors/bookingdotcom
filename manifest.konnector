@@ -5,7 +5,7 @@
   "language": "node",
   "icon": "icon.png",
   "slug": "bookingdotcom",
-  "source": "git://github.com/konnectors/bookingdotcom.git",
+  "source": "git@github.com:konnectors/bookingdotcom.git",
   "editor": "Cozy",
   "vendor_link": "http://secure.booking.com/myreservations.html",
   "categories": [
