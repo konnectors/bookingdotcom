@@ -3898,6 +3898,14 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+opentype.js@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/opentype.js/-/opentype.js-0.11.0.tgz#310f3fb85f09ca6cf22ac8cf540df67b418c3351"
+  integrity sha512-Z9NkAyQi/iEKQYzCSa7/VJSqVIs33wknw8Z8po+DzuRUAqivJ+hJZ94mveg3xIeKwLreJdWTMyEO7x1K13l41Q==
+  dependencies:
+    string.prototype.codepointat "^0.2.1"
+    tiny-inflate "^1.0.2"
+
 opentype.js@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/opentype.js/-/opentype.js-0.8.0.tgz#acabcfa1642fbe894a3e4d759e43ba694e02bd35"
@@ -4031,7 +4039,7 @@ pako@^0.2.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
   integrity sha1-8/dSL073gjSNqBYbrZ7P1Rv4OnU=
 
-pako@^1.0.6, pako@~1.0.5:
+pako@^1.0.6, pako@^1.0.8, pako@~1.0.5:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
@@ -4184,6 +4192,18 @@ pdfjs@2.1.0:
     readable-stream "^2.3.6"
     unorm "^1.4.1"
     uuid "^3.0.1"
+
+pdfjs@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/pdfjs/-/pdfjs-2.2.0.tgz#dad03ead098b53b293e511844c3396a2c5b1f8e0"
+  integrity sha512-I1WP7HWzVl+RxbKKazvLAtWtwli+UKSgmc+YmiC5+By5WZZCT9kHO6kell9iX5mvn7v+h9rXWss84e1hP1Wchw==
+  dependencies:
+    "@rkusa/linebreak" "^1.0.0"
+    opentype.js "^0.11.0"
+    pako "^1.0.8"
+    readable-stream "^3.1.1"
+    unorm "^1.4.1"
+    uuid "^3.3.2"
 
 performance-now@^2.1.0:
   version "2.1.0"
@@ -5200,6 +5220,11 @@ string-width@^3.0.0:
     emoji-regex "^7.0.1"
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^5.1.0"
+
+string.prototype.codepointat@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string.prototype.codepointat/-/string.prototype.codepointat-0.2.1.tgz#004ad44c8afc727527b108cd462b4d971cd469bc"
+  integrity sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==
 
 string_decoder@^1.0.0, string_decoder@^1.1.1:
   version "1.2.0"
