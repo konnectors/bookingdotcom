@@ -112,6 +112,8 @@ async function authenticate(username, password) {
         .split('\n')
         .find(line => line.includes('document.location.href'))
       const matches = redirect.match(/has_error=(.*)&has_error_action/)
+      log('info', 'error matching')
+      log('info', JSON.stringify(matches))
 
       if (
         matches &&
