@@ -23,8 +23,8 @@ const baseUrl = 'https://secure.booking.com/'
 
 const necessaryHeaders = {
   Referer: baseUrl,
-  Accept: 'text/html',
-  'Accept-Language': 'en'
+  Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0b.3'
 }
 
 let request = requestFactory()
