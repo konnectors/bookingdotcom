@@ -42,7 +42,7 @@
     "pdfjs": "2.4.2"
   },
   "devDependencies": {
-    "cozy-jobs-cli": "1.15.9",
+    "cozy-jobs-cli": "1.15.10",
     "cozy-konnector-build": "1.1.7"
   }
 }
