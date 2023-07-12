@@ -1,97 +1,46 @@
 {
-  "version": "1.4.0",
-  "name": "Booking.com",
+  "version": "1.0.0",
+  "name": "Template",
   "type": "konnector",
   "language": "node",
   "icon": "icon.svg",
-  "slug": "bookingdotcom",
-  "source": "git@github.com:konnectors/bookingdotcom.git",
+  "slug": "template",
+  "source": "git@github.com:konnectors/template_ccc.git",
   "editor": "Cozy",
-  "vendor_link": "http://secure.booking.com/myreservations.html",
+  "vendor_link": "https://books.toscrape.com/",
   "categories": [
     "transport"
   ],
-  "fields": {
-    "login": {
-      "type": "text"
-    },
-    "password": {
-      "type": "password"
-    },
-    "advancedFields": {
-      "folderPath": {
-        "advanced": true,
-        "isRequired": false
-      }
-    }
-  },
-  "data_types": [
-    "bill"
+  "fields": { },
+  "clientSide": true,
+  "langs": [
+    "fr"
   ],
-  "screenshots": [],
+  "folders": [
+    {
+      "defaultDir": "$administrative/$konnector/$account"
+    }
+  ],
   "permissions": {
-    "bank operations": {
-      "type": "io.cozy.bank.operations"
-    },
     "bills": {
       "type": "io.cozy.bills"
     },
     "files": {
       "type": "io.cozy.files"
-    },
-    "accounts": {
-      "type": "io.cozy.accounts",
-      "verbs": [
-        "GET"
-      ]
     }
   },
-  "developer": {
-    "name": "Cozy Cloud",
-    "url": "https://cozy.io"
-  },
-  "langs": [
-    "fr",
-    "en"
-  ],
   "locales": {
     "fr": {
-      "short_description": "Récupère vos réservations sous forme de fichier pdf",
-      "long_description": "<p>Pour tous vos séjours, ce connecteur récupère vos réservations et créé un fichier pdf.</p><br><p>Ce connecteur ne gère pas les documents pour les gérants d'etablissements hôteliers ou les propriétaires de locations de vacances.</p>",
+      "short_description": "Récupère la liste de livres",
+      "long_description": "Récupère la liste de livre sur le site exemple",
       "permissions": {
-        "bank operations": {
-          "description": "Utilisé pour relier les factures à des operations bancaires"
-        },
         "bills": {
           "description": "Utilisé pour sauver les données des factures"
         },
         "files": {
           "description": "Utilisé pour sauvegarder les factures"
-        },
-        "accounts": {
-          "description": "Utilisé pour récupérer les informations de votre compte"
-        }
-      }
-    },
-    "en": {
-      "short_description": "Fetch your bookings as pdf files",
-      "long_description": "<p>For all your stays, this connector retrieves your bookings and creates a pdf file.</p><br><p>This connector does not handle documents for hotel managers or holiday home owners.</p>",
-      "permissions": {
-        "bank operations": {
-          "description": "Required to link bank operations to bills"
-        },
-        "bills": {
-          "description": "Required to save the bills data"
-        },
-        "files": {
-          "description": "Required to save the file documents"
-        },
-        "accounts": {
-          "description": "Required to get the account's data"
         }
       }
     }
-  },
-  "banksTransactionRegExp": "\\bbooking.com\\b",
-  "manifest_version": "2"
+  }
 }
