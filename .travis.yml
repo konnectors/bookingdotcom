@@ -1,13 +1,13 @@
 language: node_js
 node_js:
-- '16.18.1'
+- '16.20.0'
 env:
   global:
   - MATTERMOST_CHANNEL=publication
-  # REGISTRY_TOKEN(editor=cozy, app=bookingdotcom)
-  - secure: usjiOazzD9psCgv7JDcTMNXwx86OPV1Fny0P3wysdOIYBkUxFnEH/uu4QjjfQq78a9FmvyrKtmUJfT6Kr9kTMjVkAKhspECyxedxBLRiT2fLw9YKW7YuFcEK2PPHU0vqBJVWAnkXQZpY1AIGYEZFjKkBkq8GsFyZhVNpgzk2T3RzbOs/zDgt1eEnyawxfDivE4+UPGo8q+NYIEOS5daG76ZlUp4lM60253q0ils/IV54gRNND1FtJdCo1pX7IIGC5T50LDV+v5DTX0nAFbQDJnEq9kXK17aWrCxlbrruDDlw8rQUD4YU4tPQvUAKbNm2D3vepClZlsTVs6WCPQVIV7g9xBivlHhYRZUOQ72Cy5SRP+CiWnlzImkysVVGUcHIzvq8vjbziPB6nTkRO9irOOeDHWboW/fjXLnXRK02J62hWRQLE4L9bZHpHH+oAeUu2npPtYtlE+klPHFwJTTsaer//E2O3n+Fm5ktQFyXBKEH9h22amEkmNCUi9K8qnUClyevc115raUUkpg6yJy8txvquEiFKMYav+X8AFSvssQfTI6eY0pc+QZM6fcOuYW1i4FOjR5jZ1aqtQlVPw/SQs5PTKqx/R2b9EByD7PcEy8NT1Qlu3Pf0N6to7pLDyrIwIRdrmYSXJPaBMuoaVVq6lqp5cwO41psxbiW1UCCAQ8=
   # MATTERMOST_HOOK_URL
-  - secure: Wfbbh+oU8K4XPpBLeHxE4libjL3TFap3B8T3tQ24jZ3d/2PNGCMf9QmxHODyp2ISaVdFwLD3J1Bh5t0mKglcmi0K85VVj69xjQqFV/lAR+P7UxtHDWC5koaUk3z6gHEKmsTHgutqMuvU75t5U6cXbRByy+nc2l1IEoaYzxnvVyjw8RSolEIKzMUISpbIw06OLteTQeygYCnebXvc2ofuxB9y7DC2pHLnz1kqvoJhWjXNdC8+pvd+PuD5v3Egtl9PDIfm+aduiuqIiyyBpaccJSsNTCQA0tV0SIo/tFB6nHMsS7ZfSSqjQlD8iGFsCoVBzLJFHyHCm3o6Wns+W7YF1f19vMOimxeE23EztAMtBx0q5B2kdBt2ODrGqaaIsR1W+Hea4uKZNtOFanYge5hq3sEZmOt55p1rz0Y4ErBI9sNQq6Ma2FURPWyO/EMyyiaeX6ZkGgjKyvKpCeeZhHQe7eAKSLIx7Ma4R24nWbgcTuelb+pZwGRyekpk4tMdQtd0t4QtP3g6UQUIjBv83jrgmsfuUvVmicvLbm76KGCT4iBSHgLBn1191q+aZFFwsxx1FE6W7VyM6yJeb/ySgAwme3RRrv4ZO6v30uShbytenPvdDZzVjL5t+O4989VSU4SbgQkeQecce6XQ1u9azgcIwIY9nNlqtDNfX0i0VufFk8U=
+  - secure: ba6Ub2xnB75ikVG6Q7dXwq0gedwnWzU+d8A+zIrckHF3nsxSu8SIXN4b/bCRBi00cpkwykA4nv/wP98Z6O45KCWpkfP8K1TSc1oH4EU8OYfnZeQNISKvmL2gCqJfiXc4IkXl2Ajbg/eCK+vC+j+QxSnAKh5goUUR3iILMcRGp3115JJZ8VxTpw/8i06KC2g0YAwJcxEnmdocNGfst3lzx61X4pNZW1qZsvsoJDwkWYQpSxQEeAC1LsTDKHZ6aI5w2TSByE1Kxw0Vjfw/hHysmcSVzpUEIhpaHtkCVcl4SUnigMMvH7ytvubbqZtCUt4b/Dl/c4sBeYitSuvPgw0f1MquRvndFeca9054Q6u43DsyrklndBHH2o0bIigxu+Qah0HOTuB0VSlTHnTh1d/sVqs5JfgJbD57AUG8cIkPUm/2ov34QYuJlErT7+0SYj0g8YhazsNjXge13NnPNrSv1gtUCeB2S0aYHx1cnC1+LAS1R80o0tecCu9D3YgA8Y1B7J1cKHnE9UvDeoiJziXyMUXYH1J24QngaoFfQkyexhuI7f91CUdfvu1bMPa9L5CR+AJqF6QUPifxnG1S/YcbcQ1pU+vADkBMxy8sL5KzcjzEYliHOU8GecxaTxYcfGY/igMMhQwtQL4OFNtVK+JJIwUgw3psJrfV0x1GW0GauAE=
+  # REGISTRY_TOKEN slug=bookingdotcom editor=cozy space=cozy_ccc
+  - secure: hncs0QWjxg/ufBk5oNbmq5b79EcIPr+g2aTUENW+BvUfQC+hBam7mWJLoj5+Ck1hz+zJrOHVyHwaSU/VI6mskdH68CeL+rdMNUBbteG2i42EaUgLZH1cFL0w80S6sa+7zuVMAos/oOr+wQzuOSGzGdoxayH4LL/HbbSWfQ2ovCZoL4pWK36swDgEhuzHSepP6BE3T/bfNDMuCY0GhH1VUapCNb1lRGWjeVw3bg4hlTE2l8QGvnergUjWPjc6Ggg/Zo8gITJaU7ABAfLOAPahyCb9C0nxsn3c1ihTfFk8ALxkvT/mN4pJI7djgZBmz/c3P5H7luEJn2Nzl4lNmE2P27/11v8N77Fn25F9kilvwdPNwFbltNfLcClAYD0KTcOo9I/O0EliPtDH52bR5jPu93DvGKSJCNbc+twi1EOPPpMtaD1s7aFb+jZ+yEUhOhUgRIL3+EWbeXiG2AXW8wlrQuFJYDzCo2qm93L1NB7uaaycAjnKLrJGCVqwK50k+dY4aF7kZ0j3G3IcB50qIzwpPHgTJ5Z5hTYT9MN5EwOKOiEY+Oy5FfqT5v+VulBfEVFDWju2gV8FSvFzwXcFE7mVFjcxaAxW9d73U8fgyOJZO5oBtzxT/S2aIIxqSIkHqGmkFYDouj+jMy6p4j9g1GJZVB7nUZTnQqxSgi9wsnS1Ksc=
 cache:
   yarn: true
   directories:
@@ -22,20 +22,22 @@ script:
 deploy:
 - provider: script
   skip-cleanup: true
-  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish --space cozy_ccc
   on:
-    branch: master
+    branch:
+    - master
+    - main
 - provider: script
   skip-cleanup: true
-  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish --postpublish mattermost
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish --postpublish mattermost --space cozy_ccc
   on:
     tags: true
 before_install:
 - openssl aes-256-cbc -K $encrypted_8ebb1ef83f64_key -iv $encrypted_8ebb1ef83f64_iv
   -in github_deploy_key.enc -out /tmp/github_deploy_key -d
 - eval "$(ssh-agent -s)"
-- chmod 600 /tmp/github_deploy_key
-- ssh-add /tmp/github_deploy_key
+- if [[ -f /tmp/github_deploy_key ]]; then chmod 600 /tmp/github_deploy_key; fi
+- if [[ -f /tmp/github_deploy_key ]]; then ssh-add /tmp/github_deploy_key; fi
 after_deploy:
-- rm /tmp/github_deploy_key
+- rm -f /tmp/github_deploy_key
 - ssh-add -D
